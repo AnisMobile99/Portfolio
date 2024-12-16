@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Anis SALAH BEY",
+  "name": "Portfolio du développeur Anis SALAH BEY",
+  "description": "Découvrez les projets et compétences de Anis SALAH BEY, développeur full-stack spécialisé en JavaScript, PHP, et IA.",
   "icons": [
     {
       "src": "favicon.ico",
