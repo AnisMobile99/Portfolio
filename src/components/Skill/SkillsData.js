@@ -6,6 +6,8 @@ import {
   FaAws,
   FaCogs,
   FaPython,
+  FaAppStore,
+  FaApple,
 } from "react-icons/fa";
 import {
   SiReact,
@@ -23,6 +25,7 @@ import {
   SiDotnet,
   SiNextdotjs,
   SiAngular,
+  SiVueDotjs, // Import Vue.js icon
   SiSymfony,
   SiDjango,
   SiTensorflow,
@@ -35,6 +38,10 @@ import {
   SiGrafana,
   SiExpress,
   SiSocketdotio,
+  SiAppstore,
+  SiGoogleplay,
+  SiVuedotjs,
+  SiCapacitor,
 } from "react-icons/si";
 
 import {
@@ -47,6 +54,7 @@ import {
   FaRobot,
   FaNetworkWired,
 } from "react-icons/fa";
+import { FcCapacitor } from "react-icons/fc";
 
 export const categoriesData = [
   { name: "All", icon: <FaCode /> },
@@ -66,40 +74,71 @@ export const skillsData = [
     icon: <FaReact />,
     color: "text-blue-400",
     category: "Web",
+    rating: 5,
   },
   {
     name: "Redux",
     icon: <SiRedux />,
     color: "text-purple-500",
     category: "Web",
+    rating: 5,
   },
   {
     name: "Next.js",
     icon: <SiNextdotjs />,
     color: "text-black",
     category: "Web",
+    rating: 4,
+  },
+  {
+    name: "Vue.js",
+    icon: <SiVuedotjs />,
+    color: "text-green-500",
+    category: "Web",
+    rating: 4,
   },
   {
     name: "Angular",
     icon: <SiAngular />,
     color: "text-red-500",
     category: "Web",
+    rating: 2,
   },
-  { name: "HTML", icon: <FaCode />, color: "text-orange-500", category: "Web" },
-  { name: "CSS", icon: <FaCode />, color: "text-blue-500", category: "Web" },
+  {
+    name: "HTML",
+    icon: <FaCode />,
+    color: "text-orange-500",
+    category: "Web",
+    rating: 5,
+  },
+  {
+    name: "CSS",
+    icon: <FaCode />,
+    color: "text-blue-500",
+    category: "Web",
+    rating: 5,
+  },
   {
     name: "TailwindCSS",
     icon: <SiTailwindcss />,
     color: "text-teal-400",
     category: "Web",
+    rating: 4,
   },
   {
     name: "TypeScript",
     icon: <SiTypescript />,
     color: "text-blue-500",
     category: "Web",
+    rating: 4,
   },
-  { name: "AJAX", icon: <FaCode />, color: "text-gray-500", category: "Web" },
+  {
+    name: "AJAX",
+    icon: <FaCode />,
+    color: "text-gray-500",
+    category: "Web",
+    rating: 4,
+  },
 
   // Mobile
   {
@@ -107,12 +146,35 @@ export const skillsData = [
     icon: <SiReact />,
     color: "text-blue-500",
     category: "Mobile",
+    rating: 5,
   },
   {
     name: "Expo",
     icon: <FaMobileAlt />,
     color: "text-green-500",
     category: "Mobile",
+    rating: 5,
+  },
+  {
+    name: "Capacitor",
+    icon: <SiCapacitor />,
+    color: "text-green-500",
+    category: "Mobile",
+    rating: 4,
+  },
+  {
+    name: "Store IOS",
+    icon: <FaApple />,
+    color: "text-green-500",
+    category: "Mobile",
+    rating: 4,
+  },
+  {
+    name: "Store Android",
+    icon: <SiGoogleplay />,
+    color: "text-green-500",
+    category: "Mobile",
+    rating: 4,
   },
 
   // Desktop
@@ -121,18 +183,21 @@ export const skillsData = [
     icon: <SiElectron />,
     color: "text-blue-400",
     category: "Desktop",
+    rating: 4,
   },
   {
     name: "ASP .NET",
     icon: <SiDotnet />,
     color: "text-purple-600",
     category: "Desktop",
+    rating: 2,
   },
   {
     name: "WPF",
     icon: <FaCode />,
     color: "text-gray-600",
     category: "Desktop",
+    rating: 2,
   },
 
   // Backend
@@ -141,36 +206,42 @@ export const skillsData = [
     icon: <FaNodeJs />,
     color: "text-green-500",
     category: "Backend",
+    rating: 5,
   },
   {
     name: "Nest.js",
     icon: <SiNestjs />,
     color: "text-red-500",
     category: "Backend",
+    rating: 5,
   },
   {
     name: "Symfony",
     icon: <SiSymfony />,
     color: "text-gray-500",
     category: "Backend",
+    rating: 3,
   },
   {
     name: "PHP",
     icon: <FaPhp />,
     color: "text-indigo-600",
     category: "Backend",
+    rating: 3,
   },
   {
     name: "Django",
     icon: <SiDjango />,
     color: "text-green-700",
     category: "Backend",
+    rating: 3,
   },
   {
     name: "Python",
     icon: <FaPython />,
     color: "text-yellow-500",
     category: "Backend",
+    rating: 3,
   },
 
   // API
@@ -179,12 +250,14 @@ export const skillsData = [
     icon: <SiExpress />,
     color: "text-gray-500",
     category: "API",
+    rating: 5,
   },
   {
     name: "WebSocket",
     icon: <SiSocketdotio />,
     color: "text-gray-500",
     category: "API",
+    rating: 4,
   },
 
   // BDD & Cloud
@@ -193,48 +266,56 @@ export const skillsData = [
     icon: <SiMysql />,
     color: "text-blue-600",
     category: "BDD & Cloud",
+    rating: 4,
   },
   {
     name: "PostgreSQL",
     icon: <SiPostgresql />,
     color: "text-blue-400",
     category: "BDD & Cloud",
+    rating: 4,
   },
   {
     name: "MongoDB",
     icon: <SiMongodb />,
     color: "text-green-400",
     category: "BDD & Cloud",
+    rating: 4,
   },
   {
     name: "GraphQL",
     icon: <SiGraphql />,
     color: "text-pink-500",
     category: "BDD & Cloud",
+    rating: 4,
   },
   {
     name: "Elasticsearch",
     icon: <SiElasticsearch />,
     color: "text-yellow-500",
     category: "BDD & Cloud",
+    rating: 3,
   },
   {
     name: "Docker",
     icon: <FaDocker />,
     color: "text-blue-400",
     category: "BDD & Cloud",
+    rating: 3,
   },
   {
     name: "AWS",
     icon: <FaAws />,
     color: "text-orange-400",
     category: "BDD & Cloud",
+    rating: 3,
   },
   {
     name: "Firebase",
     icon: <SiFirebase />,
     color: "text-yellow-400",
     category: "BDD & Cloud",
+    rating: 5,
   },
 
   // IOT & IA
@@ -243,36 +324,42 @@ export const skillsData = [
     icon: <SiTensorflow />,
     color: "text-yellow-500",
     category: "IOT & IA",
+    rating: 3,
   },
   {
     name: "PyTorch",
     icon: <SiPytorch />,
     color: "text-red-500",
     category: "IOT & IA",
+    rating: 3,
   },
   {
     name: "Scikit-learn",
     icon: <SiScikitlearn />,
     color: "text-blue-400",
     category: "IOT & IA",
+    rating: 3,
   },
   {
     name: "Paho-MQTT",
     icon: <SiAdafruit />,
     color: "text-green-500",
     category: "IOT & IA",
+    rating: 3,
   },
   {
     name: "Adafruit",
     icon: <SiAdafruit />,
     color: "text-purple-400",
     category: "IOT & IA",
+    rating: 3,
   },
   {
     name: "RPi.GPIO",
     icon: <SiRaspberrypi />,
     color: "text-red-500",
     category: "IOT & IA",
+    rating: 3,
   },
 
   // DevOps
@@ -281,17 +368,20 @@ export const skillsData = [
     icon: <SiJenkins />,
     color: "text-blue-600",
     category: "DevOps",
+    rating: 3,
   },
   {
     name: "Grafana",
     icon: <SiGrafana />,
     color: "text-yellow-500",
     category: "DevOps",
+    rating: 3,
   },
   {
     name: "Prometheus",
     icon: <SiPrometheus />,
     color: "text-red-500",
     category: "DevOps",
+    rating: 3,
   },
 ];

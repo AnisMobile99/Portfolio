@@ -7,9 +7,9 @@ const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const scrollRef = useRef(null); // Référence pour la section scrollable
+  const scrollRef = useRef(null);
 
-  // Réinitialiser le scroll au début
+  // Fonction pour réinitialiser le scroll au début
   const resetScrollPosition = () => {
     const scrollContainer = scrollRef.current;
     if (scrollContainer) {
@@ -30,10 +30,9 @@ const Projects = () => {
     }
 
     setSelectedCategory(filterCategories[newIndex]);
-    resetScrollPosition(); // Réinitialiser le scroll après changement de catégorie
+    resetScrollPosition();
   };
 
-  // Mettre à jour le scroll au début lorsque la catégorie change (manuellement via les boutons)
   useEffect(() => {
     resetScrollPosition();
   }, [selectedCategory]);
@@ -47,7 +46,7 @@ const Projects = () => {
             ? true
             : project.tags.includes(selectedCategory)
         )
-        .map((project) => [project.id, project]) // Supprime les doublons
+        .map((project) => [project.id, project])
     ).values()
   );
 
@@ -70,7 +69,7 @@ const Projects = () => {
           selectedCategory={selectedCategory}
           onCategorySelect={(category) => {
             setSelectedCategory(category);
-            resetScrollPosition(); // Réinitialiser également le scroll ici
+            resetScrollPosition();
           }}
           nextCategory={() => handleCategoryChange("next")}
           prevCategory={() => handleCategoryChange("prev")}
@@ -82,7 +81,7 @@ const Projects = () => {
           className="flex gap-6 overflow-x-auto no-scrollbar mt-6"
           style={{
             scrollSnapType: "x mandatory",
-            padding: "20px",
+            padding: "10px",
           }}
         >
           {projectsToShow.map((project, index) => (
