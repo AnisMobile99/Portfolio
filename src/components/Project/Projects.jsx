@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ProjectModal from "./ProjectModal";
 import ProjectsHeader from "./ProjectsHeader";
 import { projectsData, filterCategories } from "./ProjectsData";
@@ -8,6 +8,14 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const scrollRef = useRef(null); // Référence pour la section scrollable
+
+  // Réinitialiser le scroll au début
+  const resetScrollPosition = () => {
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      scrollContainer.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  };
 
   // Fonction pour basculer les catégories avec flèches
   const handleCategoryChange = (direction) => {
@@ -22,17 +30,13 @@ const Projects = () => {
     }
 
     setSelectedCategory(filterCategories[newIndex]);
-    scrollToCategory(newIndex); // Défilement horizontal
+    resetScrollPosition(); // Réinitialiser le scroll après changement de catégorie
   };
 
-  // Fonction pour faire défiler vers une catégorie spécifique
-  const scrollToCategory = (index) => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      const scrollAmount = scrollContainer.clientWidth * index;
-      scrollContainer.scrollTo({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
+  // Mettre à jour le scroll au début lorsque la catégorie change (manuellement via les boutons)
+  useEffect(() => {
+    resetScrollPosition();
+  }, [selectedCategory]);
 
   // Filtrer les projets par catégorie
   const filteredProjects = Array.from(
@@ -64,7 +68,10 @@ const Projects = () => {
         <ProjectsHeader
           categories={filterCategories}
           selectedCategory={selectedCategory}
-          onCategorySelect={setSelectedCategory}
+          onCategorySelect={(category) => {
+            setSelectedCategory(category);
+            resetScrollPosition(); // Réinitialiser également le scroll ici
+          }}
           nextCategory={() => handleCategoryChange("next")}
           prevCategory={() => handleCategoryChange("prev")}
         />
