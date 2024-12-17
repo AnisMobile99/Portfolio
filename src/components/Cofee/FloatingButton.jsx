@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCoffee, FaTimes, FaSmile } from "react-icons/fa";
 import EmojiPicker from "emoji-picker-react";
 
@@ -8,6 +8,15 @@ const FloatingButton = () => {
   const [selectedCoffee, setSelectedCoffee] = useState(1);
   const [message, setMessage] = useState(""); // État pour le message
   const [showEmojiPicker, setShowEmojiPicker] = useState(false); // État pour l'emoji picker
+
+  // **OUVRIR LE MODAL AUTOMATIQUEMENT APRÈS 5 SECONDES**
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, 5000); // 8 secondes
+
+    return () => clearTimeout(timer); // Nettoie le timer si le composant est démonté
+  }, []);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
