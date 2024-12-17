@@ -13,7 +13,7 @@ const FloatingButton = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 5000); // 8 secondes
+    }, 3000); // 8 secondes
 
     return () => clearTimeout(timer); // Nettoie le timer si le composant est démonté
   }, []);
@@ -136,7 +136,7 @@ const FloatingButton = () => {
                   type="submit"
                   className="w-full bg-blue-500 text-white py-2 sm:py-3 rounded-full hover:bg-blue-600 transition-all"
                 >
-                  Soutenir {selectedCoffee} $
+                  Soutenir {selectedCoffee} €
                 </button>
               </form>
             </>

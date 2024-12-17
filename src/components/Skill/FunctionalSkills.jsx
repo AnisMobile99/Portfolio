@@ -32,7 +32,7 @@ const FunctionalSkills = () => {
           key={index}
           className="flex flex-col items-center justify-center 
                      bg-white dark:bg-[#121212] rounded-lg 
-                     shadow-2xl hover:shadow-[0px_10px_25px_rgba(0,0,0,0.4)] 
+                     shadow-2xl dark:shadow-[0px_10px_25px_rgba(255,255,255,0.4)]  hover:shadow-[0px_10px_25px_rgba(0,0,0,0.4)] 
                      p-6 transition-all duration-300 dark:hover:shadow-[0px_10px_25px_rgba(255,255,255,0.4)] "
         >
           {/* Icône */}
