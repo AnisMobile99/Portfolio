@@ -7,6 +7,7 @@ import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import FloatingButton from "./components/Cofee/FloatingButton";
 import CursorTracker from "./components/Cursor/CursorTracker";
+import InterestSwipe from "./components/Interest/InterestSwipe";
 
 function App() {
   return (
