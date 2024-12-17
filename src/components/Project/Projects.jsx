@@ -88,7 +88,7 @@ const Projects = () => {
             <div
               key={`${selectedCategory}-${project.id}`}
               style={{ scrollSnapAlign: "start" }}
-              className={`flex-none w-72 bg-white dark:bg-[#1F1F1F] rounded-lg shadow-lg p-4 
+              className={`flex-none w-72 md:w-96 lg:w-[30rem] bg-white dark:bg-[#1F1F1F] rounded-lg shadow-lg p-4 
               cursor-pointer hover:scale-105 hover:z-10 relative 
               transition-all duration-300 animate-fade-in`}
               onClick={() => openModal(project)}

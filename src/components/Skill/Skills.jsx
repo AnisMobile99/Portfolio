@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SkillCard from "./SkillCard";
 import SkillsHeader from "./SkillsHeader";
 import { categoriesData, skillsData } from "./SkillsData";
@@ -19,7 +19,6 @@ const Skills = () => {
 
     const newCategory = categoriesData[newIndex].name;
     setSelectedCategory(newCategory);
-    resetScrollPosition();
   };
 
   const resetScrollPosition = () => {
@@ -27,6 +26,11 @@ const Skills = () => {
       scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
     }
   };
+
+  // Réinitialiser le scroll lorsque la catégorie change
+  useEffect(() => {
+    resetScrollPosition();
+  }, [selectedCategory]);
 
   const filteredSkills =
     selectedCategory === "All"
@@ -62,7 +66,7 @@ const Skills = () => {
           {filteredSkills.map((skill, index) => (
             <div
               key={`${selectedCategory}-${index}`}
-              className="flex-none w-36 animate-fade-in"
+              className="flex-none w-32 sm:w-36 md:w-48 lg:w-56 xl:w-64 animate-fade-in"
               style={{
                 scrollSnapAlign: "center",
               }}
