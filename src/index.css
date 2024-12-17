@@ -19,3 +19,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* Styles pour supprimer la barre de scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer et Edge */
+  scrollbar-width: none; /* Firefox */
+}
