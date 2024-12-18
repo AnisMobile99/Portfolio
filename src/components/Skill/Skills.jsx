@@ -2,10 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import SkillCard from "./SkillCard";
 import SkillsHeader from "./SkillsHeader";
 import { categoriesData, skillsData } from "./SkillsData";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import useDeviceDetection from "../../hooks/useDeviceDetection";
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const scrollRef = useRef(null);
+  const isMobile = useDeviceDetection();
 
   const handleCategoryChange = (direction) => {
     const currentIndex = categoriesData.findIndex(
@@ -19,6 +22,7 @@ const Skills = () => {
 
     const newCategory = categoriesData[newIndex].name;
     setSelectedCategory(newCategory);
+    resetScrollPosition();
   };
 
   const resetScrollPosition = () => {
@@ -27,7 +31,13 @@ const Skills = () => {
     }
   };
 
-  // Réinitialiser le scroll lorsque la catégorie change
+  const scrollHorizontally = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -200 : 200;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     resetScrollPosition();
   }, [selectedCategory]);
@@ -40,9 +50,9 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="flex justify-center items-center py-12 px-4 bg-gray-100 dark:bg-black transition-all pt-20"
+      className="flex justify-center items-center py-12 px-4 bg-gray-100 dark:bg-black transition-all pt-20 relative"
     >
-      <div className="w-full max-w-screen-lg">
+      <div className="relative w-full max-w-screen-lg">
         {/* Titre */}
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
           Mes Compétences
@@ -52,10 +62,34 @@ const Skills = () => {
         <SkillsHeader
           categories={categoriesData}
           selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
+          onSelectCategory={(category) => {
+            setSelectedCategory(category);
+            resetScrollPosition();
+          }}
           onNextCategory={() => handleCategoryChange("next")}
           onPrevCategory={() => handleCategoryChange("prev")}
         />
+
+        {/* Flèches de navigation centrées verticalement */}
+        {!isMobile && (
+          <>
+            {/* Flèche gauche */}
+            <button
+              onClick={() => scrollHorizontally("left")}
+              className="absolute left-0 top-1/2 transform -translate-y-[50%] bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all z-10"
+            >
+              <FaChevronLeft className="w-4 h-4" />
+            </button>
+
+            {/* Flèche droite */}
+            <button
+              onClick={() => scrollHorizontally("right")}
+              className="absolute right-0 top-1/2 transform -translate-y-[50%] bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all z-10"
+            >
+              <FaChevronRight className="w-4 h-4" />
+            </button>
+          </>
+        )}
 
         {/* Grille des compétences scrollable horizontalement */}
         <div
@@ -75,7 +109,7 @@ const Skills = () => {
                 name={skill.name}
                 icon={skill.icon}
                 color={skill.color}
-                rating={skill.rating} // Passe le rating ici
+                rating={skill.rating}
               />
             </div>
           ))}

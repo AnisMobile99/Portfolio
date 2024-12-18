@@ -4,16 +4,12 @@ const useDeviceDetection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkDevice = () => {
-      setIsMobile(
-        window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent)
-      );
-    };
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const mobileRegex =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
-    checkDevice(); // Vérifie au montage
-    window.addEventListener("resize", checkDevice); // Écoute le redimensionnement
-
-    return () => window.removeEventListener("resize", checkDevice); // Nettoyage
+    // Vérifie si l'appareil correspond à un appareil mobile
+    setIsMobile(mobileRegex.test(userAgent));
   }, []);
 
   return isMobile; // Retourne true si l'appareil est mobile

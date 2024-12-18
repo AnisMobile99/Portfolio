@@ -1,33 +1,29 @@
 import React, { useState, useRef, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ProjectModal from "./ProjectModal";
 import ProjectsHeader from "./ProjectsHeader";
 import { projectsData, filterCategories } from "./ProjectsData";
+import useDeviceDetection from "../../hooks/useDeviceDetection";
 
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
-
   const scrollRef = useRef(null);
+  const isMobile = useDeviceDetection(); // Détection du type d'appareil
 
-  // Fonction pour réinitialiser le scroll au début
   const resetScrollPosition = () => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      scrollContainer.scrollTo({ left: 0, behavior: "smooth" });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
     }
   };
 
-  // Fonction pour basculer les catégories avec flèches
   const handleCategoryChange = (direction) => {
     const currentIndex = filterCategories.indexOf(selectedCategory);
-    let newIndex;
-
-    if (direction === "next") {
-      newIndex = (currentIndex + 1) % filterCategories.length;
-    } else {
-      newIndex =
-        (currentIndex - 1 + filterCategories.length) % filterCategories.length;
-    }
+    const newIndex =
+      direction === "next"
+        ? (currentIndex + 1) % filterCategories.length
+        : (currentIndex - 1 + filterCategories.length) %
+          filterCategories.length;
 
     setSelectedCategory(filterCategories[newIndex]);
     resetScrollPosition();
@@ -37,7 +33,6 @@ const Projects = () => {
     resetScrollPosition();
   }, [selectedCategory]);
 
-  // Filtrer les projets par catégorie
   const filteredProjects = Array.from(
     new Map(
       projectsData
@@ -50,20 +45,26 @@ const Projects = () => {
     ).values()
   );
 
-  const projectsToShow = filteredProjects;
+  const scrollProjects = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = scrollRef.current.clientWidth;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const openModal = (project) => setSelectedProject(project);
   const closeModal = () => setSelectedProject(null);
 
   return (
     <section id="projects" className="py-12 bg-gray-100 dark:bg-black pt-20">
-      <div className="container mx-auto px-4">
-        {/* Titre */}
+      <div className="container mx-auto px-4 relative">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
           Mes Projets
         </h2>
 
-        {/* Header des catégories */}
         <ProjectsHeader
           categories={filterCategories}
           selectedCategory={selectedCategory}
@@ -75,7 +76,23 @@ const Projects = () => {
           prevCategory={() => handleCategoryChange("prev")}
         />
 
-        {/* Scrollable Projects Container */}
+        {!isMobile && (
+          <>
+            <button
+              onClick={() => scrollProjects("left")}
+              className="absolute top-1/2 left-2 -translate-y-1/2 bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600 transition-all z-10"
+            >
+              <FaChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={() => scrollProjects("right")}
+              className="absolute top-1/2 right-2 -translate-y-1/2 bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600 transition-all z-10"
+            >
+              <FaChevronRight className="w-6 h-6" />
+            </button>
+          </>
+        )}
+
         <div
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto no-scrollbar mt-6"
@@ -84,13 +101,13 @@ const Projects = () => {
             padding: "10px",
           }}
         >
-          {projectsToShow.map((project, index) => (
+          {filteredProjects.map((project) => (
             <div
               key={`${selectedCategory}-${project.id}`}
-              style={{ scrollSnapAlign: "start" }}
-              className={`flex-none w-72 md:w-96 lg:w-[30rem] bg-white dark:bg-[#1F1F1F] rounded-lg shadow-lg p-4 
+              className="flex-none w-72 md:w-96 lg:w-[30rem] bg-white dark:bg-[#1F1F1F] rounded-lg shadow-lg p-4
               cursor-pointer hover:scale-105 hover:z-10 relative 
-              transition-all duration-300 animate-fade-in`}
+              transition-all duration-300 animate-fade-in"
+              style={{ scrollSnapAlign: "start" }}
               onClick={() => openModal(project)}
             >
               <img
@@ -119,7 +136,6 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* Modal */}
       {selectedProject && (
         <ProjectModal project={selectedProject} onClose={closeModal} />
       )}

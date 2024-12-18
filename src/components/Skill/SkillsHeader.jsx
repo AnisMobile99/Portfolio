@@ -1,13 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
-const SkillsHeader = ({
-  categories,
-  selectedCategory,
-  onSelectCategory,
-  onNextCategory,
-  onPrevCategory,
-}) => {
+const SkillsHeader = ({ categories, selectedCategory, onSelectCategory }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const containerRef = useRef(null);
@@ -28,46 +22,27 @@ const SkillsHeader = ({
 
   return (
     <div className="w-full flex flex-col items-center relative">
-      {/* Boutons de navigation (flèches gauche et droite) */}
-      <div className="flex items-center justify-center gap-4 mb-4">
-        {/* Flèche gauche */}
-        <button
-          onClick={onPrevCategory}
-          className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 shadow-lg transition-all"
-        >
-          <FaChevronLeft className="w-4 h-4" />
-        </button>
-
-        {/* Affichage horizontal si l'espace le permet */}
-        <div
-          ref={containerRef}
-          className={`${
-            isOverflowing ? "hidden" : "flex"
-          } flex-wrap justify-center gap-4`}
-        >
-          {categories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => onSelectCategory(category.name)}
-              className={`${
-                selectedCategory === category.name
-                  ? "bg-blue-500 text-white shadow-md"
-                  : "bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-blue-300 dark:hover:bg-blue-700"
-              } px-4 py-2 rounded-lg flex items-center transition-all`}
-            >
-              {category.icon}
-              <span className="ml-2">{category.name}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Flèche droite */}
-        <button
-          onClick={onNextCategory}
-          className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 shadow-lg transition-all"
-        >
-          <FaChevronRight className="w-4 h-4" />
-        </button>
+      {/* Affichage horizontal des catégories */}
+      <div
+        ref={containerRef}
+        className={`${
+          isOverflowing ? "hidden" : "flex"
+        } flex-wrap justify-center gap-4 mb-4`}
+      >
+        {categories.map((category) => (
+          <button
+            key={category.name}
+            onClick={() => onSelectCategory(category.name)}
+            className={`${
+              selectedCategory === category.name
+                ? "bg-blue-500 text-white shadow-md"
+                : "bg-gray-200 dark:bg-gray-700 dark:text-white hover:bg-blue-300 dark:hover:bg-blue-700"
+            } px-4 py-2 rounded-lg flex items-center transition-all`}
+          >
+            {category.icon}
+            <span className="ml-2">{category.name}</span>
+          </button>
+        ))}
       </div>
 
       {/* Liste déroulante si les filtres débordent */}
