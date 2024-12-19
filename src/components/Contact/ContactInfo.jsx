@@ -1,5 +1,6 @@
 import React from "react";
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import AvailableDepartments from "../Map/AvailableDepartments";
 
 const ContactInfo = () => {
   return (

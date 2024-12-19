@@ -1,6 +1,7 @@
 import React from "react";
 import { FaBriefcase, FaGraduationCap, FaMapMarkerAlt } from "react-icons/fa";
 import TypingEffect from "./TypingEffect";
+import AvailableDepartments from "../Map/AvailableDepartments";
 
 const TitleAndInfo = () => {
   return (
@@ -15,10 +16,7 @@ const TitleAndInfo = () => {
       </p>
 
       {/* Localisation */}
-      <p className="flex items-center space-x-2">
-        <FaMapMarkerAlt className="text-blue-500 dark:text-white w-5 h-5" />
-        <span>Mobile en France</span>
-      </p>
+      <AvailableDepartments />
 
       {/* Expérience */}
       <p className="flex items-center space-x-2">
