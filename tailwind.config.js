@@ -23,7 +23,7 @@ module.exports = {
       animation: {
         "fade-in": "fadeIn 0.8s ease-out",
         blink: "blink 1.5s infinite",
-        "slide-up": "slideUp 0.3s ease-out",
+        "slide-up": "slideUp 0.8s ease-out",
       },
     },
   },

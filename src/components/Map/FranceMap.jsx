@@ -16,11 +16,31 @@ const FranceMapRegions = () => {
   const isMobile = useDeviceDetection();
 
   const availableRegions = [
-    "Île-de-France",
-    "Provence-Alpes-Côte d'Azur",
-    "Hauts-de-France",
-    "Auvergne-Rhône-Alpes",
-    "Occitanie",
+    {
+      name: "Île-de-France",
+      departments: ["Paris (75)"],
+    },
+    {
+      name: "Provence-Alpes-Côte d'Azur",
+      departments: [
+        "Marseille (13)",
+        "Nice (06)",
+        "Aix-En-Provence(13)",
+        "Antibes",
+      ],
+    },
+    {
+      name: "Hauts-de-France",
+      departments: ["Lille (59)"],
+    },
+    {
+      name: "Auvergne-Rhône-Alpes",
+      departments: ["Lyon (69)"],
+    },
+    {
+      name: "Occitanie",
+      departments: ["Toulouse (31)"],
+    },
   ];
 
   if (loading) {
@@ -49,7 +69,10 @@ const FranceMapRegions = () => {
               {({ geographies }) =>
                 geographies.map((geo) => {
                   const regionName = geo.properties.nom;
-                  const isAvailable = availableRegions.includes(regionName);
+                  const regionData = availableRegions.find(
+                    (region) => region.name === regionName
+                  );
+                  const isAvailable = Boolean(regionData);
 
                   return (
                     <g key={geo.rsmKey}>
@@ -81,7 +104,6 @@ const FranceMapRegions = () => {
                           },
                         }}
                       />
-                      {/* Affichage du nom de la région */}
                     </g>
                   );
                 })
@@ -91,8 +113,15 @@ const FranceMapRegions = () => {
         </ComposableMap>
       </div>
       {hoveredRegion && (
-        <div className="absolute bottom-4 text-xl font-semibold text-gray-800 dark:text-white">
-          Région : {hoveredRegion}
+        <div className="absolute bottom-4 text-center text-lg font-semibold text-gray-800 dark:text-white">
+          <p>Région : {hoveredRegion}</p>
+          <ul className="text-sm text-gray-600 dark:text-gray-300">
+            {availableRegions
+              .find((region) => region.name === hoveredRegion)
+              ?.departments.map((dept, index) => (
+                <li key={index}>{dept}</li>
+              ))}
+          </ul>
         </div>
       )}
     </div>
