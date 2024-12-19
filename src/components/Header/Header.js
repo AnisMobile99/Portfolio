@@ -5,14 +5,22 @@ import SocialIcons from "./SocialIcons";
 import ThemeSwitcher from "./ThemeSwitcher";
 import MobileMenu from "./MobileMenu";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import useScrollDirection from "../../hooks/useScrollDirection";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const scrollDirection = useScrollDirection(); // Utilisation du hook
 
   const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
-    <header className="bg-white dark:bg-[#121212] shadow-md py-4 mb-8 sticky top-0 z-50">
+    <header
+      className={`bg-white dark:bg-[#121212] shadow-md py-4 mb-8 sticky top-0 z-50 transition-all duration-5000 ${
+        scrollDirection === "down"
+          ? "opacity-50 -translate-y-full"
+          : "opacity-100 translate-y-0"
+      }`}
+    >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
         {/* Logo */}
         <Logo />
