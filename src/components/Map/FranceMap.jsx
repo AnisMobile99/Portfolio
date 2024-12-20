@@ -26,7 +26,7 @@ const FranceMapRegions = () => {
         "Marseille (13)",
         "Nice (06)",
         "Aix-En-Provence(13)",
-        "Antibes",
+        "Antibes(06600)",
       ],
     },
     {
@@ -35,7 +35,7 @@ const FranceMapRegions = () => {
     },
     {
       name: "Auvergne-Rhône-Alpes",
-      departments: ["Lyon (69)"],
+      departments: ["Lyon (69)", "Grenoble(38100)"],
     },
     {
       name: "Occitanie",

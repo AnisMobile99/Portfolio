@@ -23,9 +23,7 @@ const ContactInfo = () => {
         </li>
         <li className="flex items-center space-x-4">
           <FaMapMarkerAlt className="text-blue-500 w-6 h-6" />
-          <span className="text-gray-700 dark:text-gray-300">
-            Aix-En-Provence, France
-          </span>
+          <span className="text-gray-700 dark:text-gray-300">France</span>
         </li>
       </ul>
     </div>
