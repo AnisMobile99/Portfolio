@@ -25,7 +25,7 @@ import {
   SiDotnet,
   SiNextdotjs,
   SiAngular,
-  SiVueDotjs, // Import Vue.js icon
+  SiVueDotjs, // Import Next.js icon
   SiSymfony,
   SiDjango,
   SiTensorflow,
@@ -87,13 +87,6 @@ export const skillsData = [
     name: "Next.js",
     icon: <SiNextdotjs />,
     color: "text-black",
-    category: "Web",
-    rating: 4,
-  },
-  {
-    name: "Vue.js",
-    icon: <SiVuedotjs />,
-    color: "text-green-500",
     category: "Web",
     rating: 4,
   },

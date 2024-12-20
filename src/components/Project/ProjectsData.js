@@ -48,9 +48,9 @@ export const projectsData = [
     id: 5,
     title: "Admin Panel de supervision",
     description:
-      "Interface d'administration Vue.js avec backend Nest.js pour la gestion des utilisateurs et permissions.",
+      "Interface d'administration Next.js avec backend Nest.js pour la gestion des utilisateurs et permissions.",
     image: "https://www.capensis.fr/wp-content/uploads/listalarm.png",
-    tags: ["Vue.js", "Nest.js", "TypeScript", "Node.js", "AWS", "graphQL"],
+    tags: ["Next.js", "Nest.js", "TypeScript", "Node.js", "AWS", "graphQL"],
     link: "https://admin.koacher.app",
   },
   {
@@ -87,7 +87,7 @@ export const projectsData = [
 export const filterCategories = [
   "All",
   "React.js",
-  "Vue.js",
+  "Next.js",
   "React Native",
   "TailwindCSS",
   "Node.js",
